@@ -27,12 +27,6 @@ transactionRouter.post('/', (request, response) => {
   try {
     const { title, value, type } = request.body;
 
-    const balance = transactionsRepository.getBalance();
-
-    if (type === 'outcome' && balance.total < value) {
-      throw new Error('Insuficient total');
-    }
-
     const createTransaction = new CreateTransactionService(
       transactionsRepository,
     );
